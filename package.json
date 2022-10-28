@@ -7,6 +7,9 @@
     "postinstall": "node ./decorate-angular-cli.js",
     "start": "nx serve",
     "build": "nx build",
+    "deploy": "npm run build --prod && cp ./dist/apps/dashboard/index.html ./dist/apps/dashboard/200.html && npx surge ./dist/apps/dashboard/ https://kitty-cat-facts-application.surge.sh/",
+    "serve:api": "json-server server/db.json",
+    "serve:all": "concurrently \"json-server server/db.json\" \"ng serve\"",
     "test": "nx test",
     "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
@@ -25,6 +28,8 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nrwl/angular": "15.0.3",
+    "concurrently": "^7.5.0",
+    "json-server": "^0.17.0",
     "primeicons": "^6.0.1",
     "primeng": "^14.1.2",
     "reflect-metadata": "^0.1.13",
